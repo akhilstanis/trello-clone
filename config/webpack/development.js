@@ -1,3 +1,8 @@
 const environment = require('./environment')
 
-module.exports = environment.toWebpackConfig()
+const merge = require('webpack-merge')
+const customConfig = {
+  devtool: 'cheap-module-source-map'
+}
+
+module.exports = merge(environment.toWebpackConfig(), customConfig)
