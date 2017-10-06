@@ -7,8 +7,8 @@ const mapStateToProps = (state) => {
   const defaultBoardId = '0';
 
   return({
-    ...state.boardsById.get(defaultBoardId),
-    decks: state.decksById.filter((deck,_) => deck.boardId === defaultBoardId).valueSeq().toArray()
+    ...state.boardsById.get(defaultBoardId).toJS(),
+    decks: state.decksById.filter((deck,_) => deck.get('boardId') === defaultBoardId).valueSeq().toJS()
   });
 };
 

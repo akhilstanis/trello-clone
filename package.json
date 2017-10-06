@@ -10,6 +10,7 @@
     "react-dom": "^16.0.0",
     "react-on-rails": "^9.0.3",
     "redux": "^3.7.2",
+    "riek": "^1.1.0",
     "webpack-merge": "^4.1.0"
   },
   "devDependencies": {

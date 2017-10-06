@@ -25,7 +25,7 @@ class Deck extends React.Component {
 
   renderCards() {
     let cards = this.props.cards.map((card,i) => {
-      return(<Card key={i} title={card.title}></Card>);
+      return(<Card key={i} id={card.id} title={card.title} updateCard={this.props.updateCard}></Card>);
     });
 
     return(<div className="cards">{cards}</div>);
@@ -45,13 +45,14 @@ class Deck extends React.Component {
 const mapPropsToState = (state, ownProps) => {
   return({
     ...ownProps,
-    cards: state.cardsById.filter((card,_) => card.deckId === ownProps.id).valueSeq().toArray()
+    cards: state.cardsById.filter((card,_) => card.get('deckId') === ownProps.id).valueSeq().toJS()
   });
 };
 
 const mapDispatchToProps = (dispatch) => {
   return({
-    createCard: (card) => dispatch(cardActions.createCard(card))
+    createCard: (card) => dispatch(cardActions.createCard(card)),
+    updateCard: (id,cardAttrs) => dispatch(cardActions.updateCard(id, cardAttrs))
   });
 };
 

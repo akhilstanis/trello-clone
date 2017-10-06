@@ -18,7 +18,7 @@ export default class Board extends React.Component {
     this.props.createDeck({
       id: (new Date()).getTime().toString(),
       name: 'New Deck',
-      cards: List([]),
+      cards: [],
       boardId: this.props.id
     });
   }
@@ -43,6 +43,8 @@ export default class Board extends React.Component {
   }
 
   render() {
+    console.log(this.props.name);
+    console.log(this.renderDecks);
     return (
       <div className="board row">
         <div className="col-md-12">

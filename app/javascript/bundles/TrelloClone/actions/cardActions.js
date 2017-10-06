@@ -4,3 +4,11 @@ export const createCard = (card) => {
     card: card
   });
 };
+
+export const updateCard = (id, cardAttrs) => {
+  return({
+    type: 'UPDATE_CARD',
+    id,
+    cardAttrs
+  });
+};

@@ -1,11 +1,11 @@
-import { OrderedMap } from 'immutable';
+import { OrderedMap, Map, List } from 'immutable';
 
 const defaultBoardsState = OrderedMap({
-  '0': {
+  '0': Map({
     id: '0',
     name: 'Default Board',
-    decks: []
-  }
+    decks: List([])
+  })
 });
 
 export default (state = defaultBoardsState, action) => {
