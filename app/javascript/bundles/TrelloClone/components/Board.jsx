@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 import DecksContainer from '../containers/DecksContainer';
 
-export default class Board extends React.Component {
+class Board extends React.Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     decks: PropTypes.array.isRequired
@@ -22,3 +24,5 @@ export default class Board extends React.Component {
     );
   }
 }
+
+export default DragDropContext(HTML5Backend)(Board);

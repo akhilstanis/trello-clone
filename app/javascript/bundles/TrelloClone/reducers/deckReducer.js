@@ -11,6 +11,11 @@ export default (state = OrderedMap({}), action) => {
     case 'CREATE_CARD':
       return state.updateIn([action.card.deckId, 'cards'], cards => cards.concat(action.card.id))
 
+    case 'MOVE_CARD':
+      return state.
+        updateIn([action.oldDeckId, 'cards'], cards => cards.filter(cardId => cardId != action.id)).
+        updateIn([action.newDeckId, 'cards'], cards => cards.concat(action.id))
+
     default:
       return state;
 

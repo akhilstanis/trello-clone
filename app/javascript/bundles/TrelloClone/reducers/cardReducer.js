@@ -8,6 +8,9 @@ export default (state = OrderedMap({}), action) => {
     case 'UPDATE_CARD':
       return state.mergeIn([action.id], fromJS(action.cardAttrs));
 
+    case 'MOVE_CARD':
+      return state.setIn([action.id, 'deckId'], action.newDeckId);
+
     default:
       return state;
 
