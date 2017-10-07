@@ -24,7 +24,13 @@ class DecksContainer extends React.Component {
 
   render() {
     let decks = this.props.decksOrder.map((deckId,i) => {
-      return(<Deck key={i} updateDeck={this.props.updateDeck} moveCard={this.props.moveCard} {...this.props.decksById[deckId]} />);
+      return(
+        <Deck key={i}
+          updateDeck={this.props.updateDeck}
+          moveCard={this.props.moveCard}
+          moveDeck={this.props.moveDeck}
+          {...this.props.decksById[deckId]}
+        />);
     });
 
     return(
@@ -49,7 +55,8 @@ const mapDispatchToProps = (dispatch) => {
   return({
     createDeck: (deck) => dispatch(deckActions.createDeck(deck)),
     updateDeck: (id,deckAttrs) => dispatch(deckActions.updateDeck(id, deckAttrs)),
-    moveCard:   (id,oldDeckId,newDeckId,beforeCardId) => dispatch(cardActions.moveCard(id,oldDeckId,newDeckId, beforeCardId))
+    moveCard:   (id,oldDeckId,newDeckId,beforeCardId) => dispatch(cardActions.moveCard(id,oldDeckId,newDeckId, beforeCardId)),
+    moveDeck:   (id,boardId,beforeDeckId) => dispatch(deckActions.moveDeck(id,boardId, beforeDeckId))
   });
 };
 

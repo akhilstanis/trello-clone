@@ -12,3 +12,12 @@ export const updateDeck = (id, deckAttrs) => {
     deckAttrs
   });
 }
+
+export const moveDeck = (id, boardId, beforeDeckId) => {
+  return({
+    type: 'MOVE_DECK',
+    id,
+    boardId,
+    beforeDeckId
+  });
+};
