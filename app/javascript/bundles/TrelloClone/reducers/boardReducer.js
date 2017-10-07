@@ -10,6 +10,9 @@ const defaultBoardsState = OrderedMap({
 
 export default (state = defaultBoardsState, action) => {
   switch(action.type) {
+    case 'CREATE_DECK':
+      return state.updateIn([action.deck.boardId, 'decks'], decks => decks.concat(action.deck.id))
+
     default:
       return state;
 
