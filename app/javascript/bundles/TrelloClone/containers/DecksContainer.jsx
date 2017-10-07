@@ -22,7 +22,7 @@ class DecksContainer extends React.Component {
 
   render() {
     let decks = this.props.decks.map((deck,i) => {
-      return(<Deck key={i} {...deck} />);
+      return(<Deck key={i} updateDeck={this.props.updateDeck} {...deck} />);
     });
 
     return(
@@ -44,7 +44,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return({
-    createDeck: (deck) => dispatch(deckActions.createDeck(deck))
+    createDeck: (deck) => dispatch(deckActions.createDeck(deck)),
+    updateDeck: (id,deckAttrs) => dispatch(deckActions.updateDeck(id, deckAttrs))
   });
 };
 

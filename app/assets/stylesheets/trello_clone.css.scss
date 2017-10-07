@@ -14,6 +14,10 @@ body {
 
     h2.deck-name {
       margin-left: 10px;
+
+      input {
+        width: 97%;
+      }
     }
 
     .card {
@@ -23,6 +27,14 @@ body {
       border-radius: 5px;
       background: #1abc9c;
       color: #fff;
+
+      input {
+        background: #1abc9c;
+        color: #fff;
+        border: none;
+        width: 100%;
+        padding: 10px;
+      }
     }
 
     a.add-card-link {

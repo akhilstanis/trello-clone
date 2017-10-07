@@ -4,3 +4,11 @@ export const createDeck = (deck) => {
     deck: deck
   });
 };
+
+export const updateDeck = (id, deckAttrs) => {
+  return({
+    type: 'UPDATE_DECK',
+    id,
+    deckAttrs
+  });
+}
