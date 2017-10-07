@@ -9,7 +9,7 @@ import * as cardActions from '../actions/cardActions';
 class DecksContainer extends React.Component {
   static propTypes = {
     boardId: PropTypes.string.isRequired,
-    decks:   PropTypes.array.isRequired
+    decksById: PropTypes.object.isRequired
   }
 
   onAddDeck() {
@@ -23,8 +23,8 @@ class DecksContainer extends React.Component {
   }
 
   render() {
-    let decks = this.props.decks.map((deck,i) => {
-      return(<Deck key={i} updateDeck={this.props.updateDeck} moveCard={this.props.moveCard} {...deck} />);
+    let decks = this.props.decksOrder.map((deckId,i) => {
+      return(<Deck key={i} updateDeck={this.props.updateDeck} moveCard={this.props.moveCard} {...this.props.decksById[deckId]} />);
     });
 
     return(
@@ -40,7 +40,8 @@ class DecksContainer extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return({
-    decks: state.decksById.filter((deck,_) => deck.get('boardId') === ownProps.boardId).valueSeq().toJS()
+    decksById: state.decksById.filter((deck,_) => deck.get('boardId') === ownProps.boardId).toJS(),
+    decksOrder: state.boardsById.get(ownProps.boardId).get('decksOrder').toArray()
   });
 };
 
