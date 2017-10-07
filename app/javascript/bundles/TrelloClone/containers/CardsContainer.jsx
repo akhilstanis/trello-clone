@@ -10,7 +10,7 @@ import { DraggableItemTypes } from '../constants';
 class CardsContainer extends React.Component {
   static propTypes = {
     deckId: PropTypes.string.isRequired,
-    cards:  PropTypes.array.isRequired
+    cardsById:  PropTypes.object.isRequired
   }
 
   onAddCard() {
@@ -22,8 +22,8 @@ class CardsContainer extends React.Component {
   }
 
   render() {
-    let cards = this.props.cards.map((card,i) => {
-      return(<Card updateCard={this.props.updateCard} key={i} {...card} />);
+    let cards = this.props.cardsOrder.map((cardId,i) => {
+      return(<Card updateCard={this.props.updateCard} key={i} {...this.props.cardsById[cardId]} />);
     });
 
     const { connectDropTarget, isOver } = this.props;
@@ -55,7 +55,8 @@ const dropTargetedCardsConatiner = DropTarget(DraggableItemTypes.CARD, deckTarge
 
 const mapStateToProps = (state, ownProps) => {
   return({
-    cards: state.cardsById.filter((card,_) => card.get('deckId') === ownProps.deckId).valueSeq().toJS()
+    cardsById: state.cardsById.filter((card,_) => card.get('deckId') === ownProps.deckId).toJS(),
+    cardsOrder: state.decksById.get(ownProps.deckId).get('cardsOrder').toArray()
   });
 };
 

@@ -16,6 +16,7 @@ class DecksContainer extends React.Component {
       id: (new Date()).getTime().toString(),
       name: 'New Deck',
       cards: [],
+      cardsOrder: [],
       boardId: this.props.boardId
     });
   }
