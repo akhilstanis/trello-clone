@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import Deck from '../components/deck';
 import * as deckActions from '../actions/deckActions';
+import * as cardActions from '../actions/cardActions';
 
 class DecksContainer extends React.Component {
   static propTypes = {
@@ -23,7 +24,7 @@ class DecksContainer extends React.Component {
 
   render() {
     let decks = this.props.decks.map((deck,i) => {
-      return(<Deck key={i} updateDeck={this.props.updateDeck} {...deck} />);
+      return(<Deck key={i} updateDeck={this.props.updateDeck} moveCard={this.props.moveCard} {...deck} />);
     });
 
     return(
@@ -46,7 +47,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return({
     createDeck: (deck) => dispatch(deckActions.createDeck(deck)),
-    updateDeck: (id,deckAttrs) => dispatch(deckActions.updateDeck(id, deckAttrs))
+    updateDeck: (id,deckAttrs) => dispatch(deckActions.updateDeck(id, deckAttrs)),
+    moveCard:   (id,oldDeckId,newDeckId,beforeCardId) => dispatch(cardActions.moveCard(id,oldDeckId,newDeckId, beforeCardId))
   });
 };
 
