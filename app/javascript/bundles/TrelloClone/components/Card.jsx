@@ -4,12 +4,9 @@ import { RIEInput } from 'riek';
 
 export default class Card extends React.Component {
   static propTypes = {
+    id:    PropTypes.string.isRequired,
     title: PropTypes.string.isRequired
   };
-
-  constructor(props) {
-    super(props);
-  }
 
   onUpdateCard(updatedAttrs) {
     this.props.updateCard(this.props.id, updatedAttrs);

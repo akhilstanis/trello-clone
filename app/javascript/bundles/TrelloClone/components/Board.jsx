@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { List } from 'immutable';
 
-import Deck from './Deck';
+import DecksContainer from '../containers/DecksContainer';
 
 export default class Board extends React.Component {
   static propTypes = {
@@ -10,48 +9,14 @@ export default class Board extends React.Component {
     decks: PropTypes.array.isRequired
   };
 
-  constructor(props) {
-    super(props);
-  }
-
-  onAddCard() {
-    this.props.createDeck({
-      id: (new Date()).getTime().toString(),
-      name: 'New Deck',
-      cards: [],
-      boardId: this.props.id
-    });
-  }
-
-  renderDecks() {
-    let decks = this.props.decks.map((deck,i) => {
-      return(
-        <div className="col-md-3">
-          <Deck key={i} id={deck.id} name={deck.name}></Deck>
-        </div>
-      );
-    });
-
-    return(
-      <div className="decks row">
-        {decks}
-        <div className="col-md-3">
-          <a className="add-deck-link" onClick={this.onAddCard.bind(this)}>Add Deck</a>
-        </div>
-      </div>
-    );
-  }
-
   render() {
-    console.log(this.props.name);
-    console.log(this.renderDecks);
     return (
       <div className="board row">
         <div className="col-md-12">
           <h1>{this.props.name}</h1>
         </div>
         <div className="col-md-12">
-          {this.renderDecks()}
+          <DecksContainer boardId={this.props.id} />
         </div>
       </div>
     );
