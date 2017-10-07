@@ -21,7 +21,7 @@ class CardsContainer extends React.Component {
 
   render() {
     let cards = this.props.cards.map((card,i) => {
-      return(<Card key={i} {...card} />);
+      return(<Card updateCard={this.props.updateCard} key={i} {...card} />);
     });
 
     return(
