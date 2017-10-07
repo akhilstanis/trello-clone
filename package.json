@@ -11,6 +11,7 @@
     "react-dnd-html5-backend": "^2.5.3",
     "react-dom": "^16.0.0",
     "react-on-rails": "^9.0.3",
+    "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
     "riek": "^1.1.0",
     "webpack-merge": "^4.1.0"

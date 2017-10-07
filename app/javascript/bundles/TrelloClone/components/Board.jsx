@@ -7,8 +7,8 @@ import DecksContainer from '../containers/DecksContainer';
 
 class Board extends React.Component {
   static propTypes = {
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    decks: PropTypes.array.isRequired
   };
 
   render() {
