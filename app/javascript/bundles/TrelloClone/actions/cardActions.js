@@ -13,11 +13,12 @@ export const updateCard = (id, cardAttrs) => {
   });
 };
 
-export const moveCard = (id, oldDeckId, newDeckId) => {
+export const moveCard = (id, oldDeckId, newDeckId, beforeCardId) => {
   return({
     type: 'MOVE_CARD',
     id,
     oldDeckId,
-    newDeckId
+    newDeckId,
+    beforeCardId
   });
 };

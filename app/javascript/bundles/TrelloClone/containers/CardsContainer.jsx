@@ -1,11 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { DropTarget } from 'react-dnd';
 
 import Card from '../components/card';
 import * as cardActions from '../actions/cardActions';
-import { DraggableItemTypes } from '../constants';
 
 class CardsContainer extends React.Component {
   static propTypes = {
@@ -23,12 +21,10 @@ class CardsContainer extends React.Component {
 
   render() {
     let cards = this.props.cardsOrder.map((cardId,i) => {
-      return(<Card updateCard={this.props.updateCard} key={i} {...this.props.cardsById[cardId]} />);
+      return(<Card updateCard={this.props.updateCard} moveCard={this.props.moveCard} key={i} {...this.props.cardsById[cardId]} />);
     });
 
-    const { connectDropTarget, isOver } = this.props;
-
-    return connectDropTarget(
+    return (
       <div className="cards">
         {cards}
         <a className="add-card-link" onClick={this.onAddCard.bind(this)}>Add Card</a>
@@ -36,22 +32,6 @@ class CardsContainer extends React.Component {
     );
   }
 }
-
-const deckTarget = {
-  drop(props, monitor) {
-    const item = monitor.getItem();
-    props.moveCard(item.cardId, item.oldDeckId, props.deckId);
-  }
-};
-
-const collect = (connect, monitor) => {
-  return({
-    connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver
-  });
-};
-
-const dropTargetedCardsConatiner = DropTarget(DraggableItemTypes.CARD, deckTarget, collect)(CardsContainer);
 
 const mapStateToProps = (state, ownProps) => {
   return({
@@ -64,9 +44,9 @@ const mapDispatchToProps = (dispatch) => {
   return({
     createCard: (card) => dispatch(cardActions.createCard(card)),
     updateCard: (id,cardAttrs) => dispatch(cardActions.updateCard(id, cardAttrs)),
-    moveCard:   (id,oldDeckId,newDeckId) => dispatch(cardActions.moveCard(id,oldDeckId,newDeckId))
+    moveCard:   (id,oldDeckId,newDeckId,beforeCardId) => dispatch(cardActions.moveCard(id,oldDeckId,newDeckId, beforeCardId))
   });
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(dropTargetedCardsConatiner);
+export default connect(mapStateToProps, mapDispatchToProps)(CardsContainer);
 

@@ -14,10 +14,12 @@ export default (state = OrderedMap({}), action) => {
         updateIn([action.card.deckId, 'cardsOrder'], cards => cards.concat(action.card.id))
 
     case 'MOVE_CARD':
-      // TODO: cardsOrder
+      let insertAt = state.getIn([action.newDeckId, 'cardsOrder']).indexOf(action.beforeCardId);
       return state.
         updateIn([action.oldDeckId, 'cards'], cards => cards.filter(cardId => cardId != action.id)).
-        updateIn([action.newDeckId, 'cards'], cards => cards.concat(action.id))
+        updateIn([action.oldDeckId, 'cardsOrder'], cards => cards.filter(cardId => cardId != action.id)).
+        updateIn([action.newDeckId, 'cards'], cards => cards.concat(action.id)).
+        updateIn([action.newDeckId, 'cardsOrder'], cards => cards.insert(insertAt,action.id))
 
     default:
       return state;

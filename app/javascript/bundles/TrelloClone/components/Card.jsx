@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { RIEInput } from 'riek';
-import { DragSource } from 'react-dnd';
+import { DragSource, DropTarget } from 'react-dnd';
 
 import { DraggableItemTypes } from '../constants';
 
@@ -18,13 +18,13 @@ class Card extends React.Component {
   }
 
   render() {
-    const { connectDragSource, isDragging } = this.props;
+    const { connectDragSource, isDragging, connectDropTarget, isOver } = this.props;
 
-    return connectDragSource(
+    return connectDropTarget(connectDragSource(
       <div className="card" style={{ opacity: isDragging ? 0.5 : 1 }}>
         <RIEInput value={this.props.title} propName="title" change={this.onUpdateCard.bind(this)} />
       </div>
-    );
+    ));
   }
 }
 
@@ -37,11 +37,27 @@ const cardSource = {
   }
 };
 
-const collect = (connect, monitor) => {
+const collectSource = (connect, monitor) => {
   return({
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging()
   });
 };
 
-export default DragSource(DraggableItemTypes.CARD, cardSource, collect)(Card);
+const dragSourcedCard = DragSource(DraggableItemTypes.CARD, cardSource, collectSource)(Card);
+
+const cardTarget = {
+  drop(props, monitor) {
+    const { cardId, oldDeckId } = monitor.getItem();
+    props.moveCard(cardId, oldDeckId, props.deckId, props.id);
+  }
+};
+
+const collectTarget = (connect, monitor) => {
+  return {
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver()
+  };
+};
+
+export default DropTarget(DraggableItemTypes.CARD, cardTarget, collectTarget)(dragSourcedCard);
