@@ -2,12 +2,19 @@ body {
   background: #1abc9c;
 }
 
-h1.app-title {
-  color: #fff;
-  margin-bottom: 30px;
+.header {
+  text-align: center;
+  color: white;
+  padding: 10px;
+  border-bottom: #16a085 1px solid;
+  font-size: 18px;
 }
 
 .boards-container {
+  h1 {
+    background: #1abc9c;
+    color: #fff;
+  }
   .board {
     background: #16a085;
     text-align: center;
@@ -19,6 +26,20 @@ h1.app-title {
 .board {
   background: #1abc9c;
   color: #fff;
+
+  .back-link {
+    margin-right: 10px;
+  }
+
+  h1.board-title {
+    input {
+      background: #1abc9c;
+      color: #fff;
+      border: none;
+      width: 98%;
+      padding: 10px;
+    }
+  }
 
   .deck {
     border: #fff 1px solid;

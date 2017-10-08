@@ -4,3 +4,11 @@ export const createBoard = (board) => {
     board
   });
 };
+
+export const updateBoard = (id, boardAttrs) => {
+  return({
+    type: 'UPDATE_BOARD',
+    id,
+    boardAttrs
+  });
+};

@@ -5,6 +5,9 @@ export default (state = OrderedMap({}), action) => {
     case 'CREATE_BOARD':
       return state.set(action.board.id, fromJS(action.board));
 
+    case 'UPDATE_BOARD':
+      return state.mergeIn([action.id], fromJS(action.boardAttrs));
+
     case 'CREATE_DECK':
       return state.
         updateIn([action.deck.boardId, 'decks'], decks => decks.concat(action.deck.id)).
