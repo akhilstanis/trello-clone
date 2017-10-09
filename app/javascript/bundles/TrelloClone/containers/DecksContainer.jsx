@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Deck from '../components/deck';
+import Deck from '../components/Deck';
 import * as deckActions from '../actions/deckActions';
 import * as cardActions from '../actions/cardActions';
 
