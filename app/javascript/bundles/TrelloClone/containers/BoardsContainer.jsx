@@ -40,7 +40,7 @@ class BoardsContainer extends React.Component {
         </div>
         {this.renderBoards()}
         <div className="col-md-3">
-          <a href="#" onClick={this.onCreateBoard.bind(this)}><div className="board">Add Board</div></a>
+          <a href="#" onClick={this.onCreateBoard.bind(this)}><div className="create-board">Add Board</div></a>
         </div>
       </div>
     );
